@@ -6,12 +6,8 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-const userRouter = express.Router();
-
-app.use('/api/v1', userRouter);
-
 app.get('/', (req: Request, res: Response) => {
-  res.send('hell world');
+  res.send('Roadmap App server boosted on....🔥🔥🚀');
 });
 
 //global error handler

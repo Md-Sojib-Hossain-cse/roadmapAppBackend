@@ -7,12 +7,25 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:dev": "nodemon ./dist/app/server.js"
+    "start:dev": "nodemon ./dist/app/server.js",
+    "lint": "eslint --ext .js,.ts",
+    "lint:fix": "npm run lint --fix",
+    "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
+    "prettier:fix": "npx prettier --write src"
   },
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/parser": "^8.34.1",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.2.0",
     "nodemon": "^3.1.10",
-    "typescript": "^5.8.3"
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1"
   }
 }

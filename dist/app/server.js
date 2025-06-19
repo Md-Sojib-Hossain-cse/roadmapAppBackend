@@ -12,21 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose = require("mongoose");
+const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
-const port = 5000;
-let server;
+const config_1 = __importDefault(require("./config"));
+const port = config_1.default.port || 5000;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose.connect(process.env.DATABASE_URL);
-        // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+        try {
+            yield mongoose_1.default.connect(config_1.default.database_url);
+            app_1.default.listen(port, () => {
+                console.log(`Example app listening on port ${port}`);
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 }
-function bootstrap() {
-    return __awaiter(this, void 0, void 0, function* () {
-        server = app_1.default.listen(port, () => {
-            console.log(`Example app listening on port ${port}`);
-        });
-    });
-}
-bootstrap();
+main();

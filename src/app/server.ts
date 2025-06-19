@@ -1,21 +1,19 @@
-const mongoose = require("mongoose");
-import { Server } from "http";
-import app from "./app";
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config';
 
-const port = 5000;
-
-let server: Server;
+const port = config.port || 5000;
 
 async function main() {
-  await mongoose.connect(process.env.DATABASE_URL);
+  try {
+    await mongoose.connect(config.database_url as string);
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-async function bootstrap() {
-  server = app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-  });
-}
-
-bootstrap();
+main();

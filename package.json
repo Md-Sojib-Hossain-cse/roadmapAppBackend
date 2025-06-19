@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:dev": "nodemon ./dist/app/server.js",
+    "start:prod": "nodemon ./dist/app/server.js",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/app/server.ts",
     "lint": "eslint --ext .js,.ts",
     "lint:fix": "npm run lint --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",

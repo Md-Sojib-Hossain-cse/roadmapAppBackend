@@ -2,8 +2,8 @@ export type TUser = {
   name: string;
   email: string;
   password: string;
-  image: string;
+  image?: string;
   gender: 'male' | 'female' | 'others';
-  role: 'user' | 'admin';
-  isActive: boolean;
+  role?: 'user' | 'admin';
+  isActive?: boolean;
 };

@@ -1,6 +1,8 @@
+import httpStatus from 'http-status';
 import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './users.service';
 import userValidationSchema from './users.validations';
+import sendResponse from '../../utils/sendResponse';
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -13,18 +15,13 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     const result = await UserServices.createUserIntoDB(zodParsedData);
 
     //send response
-    res.status(200).send({
+    sendResponse(res, {
       success: true,
-      message: 'User Created Successfully',
+      statusCode: httpStatus.OK,
+      message: 'User Created Successfully!',
       data: result,
     });
   } catch (error) {
-    // res.status(400).send({
-    //   success: true,
-    //   message: 'Something went wrong!',
-    //   error,
-    // });
-
     // error send to global error handler
     next(error);
   }
@@ -37,9 +34,10 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
     const result = await UserServices.getUserFromDB(id);
 
     //send response
-    res.status(200).send({
+    sendResponse(res, {
       success: true,
-      message: 'User Data Retrieve Successfully',
+      statusCode: httpStatus.OK,
+      message: 'User Data Retrieve Successfully!',
       data: result,
     });
   } catch (error) {

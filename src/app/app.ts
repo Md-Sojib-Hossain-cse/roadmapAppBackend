@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import { UserRoutes } from './modules/users/users.routes';
 const app: Application = express();
 
@@ -14,11 +14,13 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 //global error handler
-app.use((error, req: Request, res: Response) => {
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  let statusCode = error.statusCode || 500;
+  let message = error.message || 'something went wrong!';
   if (error) {
-    res.status(400).json({
+    res.status(statusCode).json({
       success: false,
-      message: 'something went wrong',
+      message: message,
     });
   }
 });

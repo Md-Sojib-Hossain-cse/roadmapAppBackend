@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './users.service';
 import userValidationSchema from './users.validations';
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.body;
 
@@ -19,16 +19,18 @@ const createUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send({
-      success: true,
-      message: 'Something went wrong!',
-      error,
-    });
+    // res.status(400).send({
+    //   success: true,
+    //   message: 'Something went wrong!',
+    //   error,
+    // });
+
+    // error send to global error handler
+    next(error);
   }
 };
 
-const getUser = async (req: Request, res: Response) => {
+const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
 
@@ -41,12 +43,7 @@ const getUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send({
-      success: true,
-      message: 'Something went wrong!',
-      error,
-    });
+    next(error);
   }
 };
 

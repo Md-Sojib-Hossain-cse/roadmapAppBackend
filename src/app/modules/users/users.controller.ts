@@ -7,11 +7,7 @@ import catchAsync from '../../utils/catchAsync';
 const createUser = catchAsync(async (req, res, next) => {
   const user = req.body;
 
-  //data validating using zod
-
-  const zodParsedData = userValidationSchema.parse(user);
-
-  const result = await UserServices.createUserIntoDB(zodParsedData);
+  const result = await UserServices.createUserIntoDB(user);
 
   //send response
   sendResponse(res, {

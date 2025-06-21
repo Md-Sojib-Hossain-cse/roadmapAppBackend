@@ -37,5 +37,4 @@ const userValidationSchema = z.object({
 
   isActive: z.boolean().default(true),
 });
-
 export default userValidationSchema;

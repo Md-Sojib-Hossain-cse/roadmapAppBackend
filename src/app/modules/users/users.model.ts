@@ -22,7 +22,7 @@ const userSchema = new Schema<TUser>(
     email: {
       type: String,
       required: [true, 'Email is required to create a user.'],
-      unique: [true, '{VALUE} user is already Exists.'],
+      unique: true,
       trim: true,
     },
     password: {
@@ -36,7 +36,7 @@ const userSchema = new Schema<TUser>(
       type: String,
       enum: {
         values: ['male', 'female', 'others'],
-        message: '{VALUE} is required to create a user.',
+        message: 'Gender is required to create a user.',
       },
       required: true,
     },
@@ -47,7 +47,6 @@ const userSchema = new Schema<TUser>(
     timestamps: true,
   },
 );
-
 
 //Pre middleware to encrypt password
 userSchema.pre('save', async function (next) {

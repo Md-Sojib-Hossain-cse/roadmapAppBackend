@@ -16,11 +16,12 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
 const config_1 = __importDefault(require("./config"));
 const port = config_1.default.port || 5000;
+let server;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(config_1.default.database_url);
-            app_1.default.listen(port, () => {
+            server = app_1.default.listen(port, () => {
                 console.log(`Example app listening on port ${port}`);
             });
         }
@@ -30,3 +31,21 @@ function main() {
     });
 }
 main();
+//node js process run on event driven architecture , so we are listening the process for unhandledRejection , if its happen then
+process.on('unhandledRejection', () => {
+    console.log('unhandledRejection detected , Shutting down the server');
+    //we are checking if any process are running on server or not if then
+    if (server) {
+        //we are closing all our server if there any process are running
+        server.close(() => {
+            //then we are stopping our process
+            process.exit(1);
+        });
+    }
+    //if no process running on server
+    process.exit(1);
+});
+process.on('uncaughtException', () => {
+    console.log('uncaughtException detected , Shutting down the server');
+    process.exit(1);
+});

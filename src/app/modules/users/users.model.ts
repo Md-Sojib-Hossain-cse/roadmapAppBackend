@@ -12,7 +12,6 @@ const userSchema = new Schema<TUser>(
       trim: true,
       validate: function (value: string) {
         const nameStr = value.charAt(0).toUpperCase() + value.slice(1);
-        console.log(value);
         if (value !== nameStr) {
           return false;
         }
@@ -63,7 +62,6 @@ userSchema.pre('save', async function (next) {
 userSchema.post('save', function (doc, next) {
   doc.password = '';
 
-  console.log(doc);
   next();
 });
 

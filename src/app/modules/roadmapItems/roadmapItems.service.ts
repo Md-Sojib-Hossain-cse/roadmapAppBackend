@@ -12,7 +12,7 @@ const getSingleRoadmapItemsFromDB = async (id: string) => {
 };
 
 const getAllRoadmapItemsFromDB = async () => {
-  const result = await RoadmapItemModel.find();
+  const result = await RoadmapItemModel.find().sort('-createdAt');
   return result;
 };
 

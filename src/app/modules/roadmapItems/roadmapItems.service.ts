@@ -6,6 +6,18 @@ const createRoadmapItemsIntoDB = async (payload: TRoadmapItems) => {
   return result;
 };
 
+const getSingleRoadmapItemsFromDB = async (id: string) => {
+  const result = await RoadmapItemModel.findById(id);
+  return result;
+};
+
+const getAllRoadmapItemsFromDB = async () => {
+  const result = await RoadmapItemModel.find();
+  return result;
+};
+
 export const RoadmapItemsServices = {
   createRoadmapItemsIntoDB,
+  getSingleRoadmapItemsFromDB,
+  getAllRoadmapItemsFromDB,
 };

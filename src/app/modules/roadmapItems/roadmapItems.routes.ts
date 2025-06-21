@@ -11,4 +11,8 @@ roadmapItemsRouter.post(
   RoadmapItemsControllers.createRoadmapItems,
 );
 
+roadmapItemsRouter.get('/:id', RoadmapItemsControllers.getSingleRoadmapItem);
+
+roadmapItemsRouter.get('/', RoadmapItemsControllers.getAllSingleRoadmapItem);
+
 export const roadmapItemsRoutes = roadmapItemsRouter;

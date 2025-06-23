@@ -8,6 +8,7 @@ export type TComments = {
 };
 
 export type TReplies = {
+  commentId: Types.ObjectId;
   userId: Types.ObjectId;
   text: string;
 };

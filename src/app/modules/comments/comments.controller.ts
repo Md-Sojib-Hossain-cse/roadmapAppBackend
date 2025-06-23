@@ -56,9 +56,23 @@ const deleteComment = catchAsync(async (req, res) => {
   });
 });
 
+const createReplies = catchAsync(async (req, res) => {
+  const { commentId } = req.params;
+  const repliesData = req.body;
+  const result = await CommentsServices.createReplyOnDB(commentId, repliesData);
+
+  sendResponse(res, {
+    success: true,
+    message: 'Successfully Post a Reply.',
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+
 export const CommentsController = {
   getAllComments,
   createComment,
   deleteComment,
   updateComment,
+  createReplies,
 };

@@ -1,6 +1,7 @@
 import {
   TComments,
   TDeleteCommentPayload,
+  TReplies,
   TUpdateCommentPayload,
 } from './comments.interface';
 import { CommentsModel } from './comments.model';
@@ -51,9 +52,30 @@ const deleteCommentFromDB = async (
   return result;
 };
 
+const createReplyOnDB = async (id: string, payload: TReplies) => {
+  const isCommentExists = await CommentsModel.findById(id);
+
+  if (!isCommentExists) {
+    throw new Error(
+      "Comment is not exist or maybe deleted . You can't reply at this moment.",
+    );
+  }
+
+  const result = await CommentsModel.findByIdAndUpdate(
+    id,
+    {
+      $addToSet: { replies: payload },
+    },
+    { new: true },
+  );
+
+  return result;
+};
+
 export const CommentsServices = {
   getAllCommentsFromDB,
   createCommentsOnDB,
   deleteCommentFromDB,
   updateCommentOnDB,
+  createReplyOnDB,
 };

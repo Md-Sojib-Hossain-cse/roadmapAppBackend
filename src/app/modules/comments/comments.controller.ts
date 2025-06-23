@@ -1,6 +1,9 @@
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { TDeleteCommentPayload } from './comments.interface';
+import {
+  TDeleteCommentPayload,
+  TUpdateCommentPayload,
+} from './comments.interface';
 import { CommentsServices } from './comments.service';
 import httpStatus from 'http-status';
 
@@ -27,6 +30,19 @@ const createComment = catchAsync(async (req, res) => {
   });
 });
 
+const updateComment = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const commentInfo: TUpdateCommentPayload = req.body;
+  const result = await CommentsServices.updateCommentOnDB(id, commentInfo);
+
+  sendResponse(res, {
+    success: true,
+    message: 'Comment Updated Successfully!',
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+
 const deleteComment = catchAsync(async (req, res) => {
   const { id } = req.params;
   const userInfo: TDeleteCommentPayload = req.body;
@@ -44,4 +60,5 @@ export const CommentsController = {
   getAllComments,
   createComment,
   deleteComment,
+  updateComment,
 };

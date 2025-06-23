@@ -16,3 +16,9 @@ export type TDeleteCommentPayload = {
   userId: Types.ObjectId;
   email: string;
 };
+
+export type TUpdateCommentPayload = {
+  userId: Types.ObjectId;
+  email: string;
+  text: string;
+};

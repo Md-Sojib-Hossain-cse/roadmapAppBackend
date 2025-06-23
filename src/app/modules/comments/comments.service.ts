@@ -1,4 +1,8 @@
-import { TComments, TDeleteCommentPayload } from './comments.interface';
+import {
+  TComments,
+  TDeleteCommentPayload,
+  TUpdateCommentPayload,
+} from './comments.interface';
 import { CommentsModel } from './comments.model';
 
 const getAllCommentsFromDB = async () => {
@@ -8,6 +12,27 @@ const getAllCommentsFromDB = async () => {
 
 const createCommentsOnDB = async (payload: TComments) => {
   const result = await CommentsModel.create(payload);
+  return result;
+};
+
+const updateCommentOnDB = async (
+  id: string,
+  payload: TUpdateCommentPayload,
+) => {
+  const res = await CommentsModel.findById(id);
+
+  if (!res?.userId.equals(payload?.userId)) {
+    throw new Error('This User has no access to update this comment');
+  }
+
+  const result = await CommentsModel.findByIdAndUpdate(
+    id,
+    { text: payload?.text || '' },
+    {
+      new: true,
+    },
+  );
+
   return result;
 };
 
@@ -30,4 +55,5 @@ export const CommentsServices = {
   getAllCommentsFromDB,
   createCommentsOnDB,
   deleteCommentFromDB,
+  updateCommentOnDB,
 };

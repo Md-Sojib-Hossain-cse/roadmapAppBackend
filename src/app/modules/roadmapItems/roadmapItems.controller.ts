@@ -57,9 +57,27 @@ const addUpvoteInRoadmapItemDocument = catchAsync(async (req, res) => {
   });
 });
 
+const removeUpvoteInRoadmapItemDocument = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const userInfo = req.body;
+  const result =
+    await RoadmapItemsServices.removeUpVoteInRoadmapItemDocumentInDB(
+      id,
+      userInfo,
+    );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Upvote removed Successfully',
+    data: result,
+  });
+});
+
 export const RoadmapItemsControllers = {
   createRoadmapItems,
   getSingleRoadmapItem,
   getAllSingleRoadmapItem,
   addUpvoteInRoadmapItemDocument,
+  removeUpvoteInRoadmapItemDocument,
 };

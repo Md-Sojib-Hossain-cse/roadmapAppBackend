@@ -16,15 +16,46 @@ const getAllRoadmapItemsFromDB = async () => {
   return result;
 };
 
+const removeUpVoteInRoadmapItemDocumentInDB = async (
+  id: string,
+  payload: { userId: string; email: string },
+) => {
+  const idRoadmapItemExists = await RoadmapItemModel.findById(id);
+
+  if (!idRoadmapItemExists) {
+    throw new Error('Roadmap item not Exists.');
+  }
+
+  const alreadyVoted = idRoadmapItemExists?.upvotesBy.includes(payload?.email);
+
+  if (!alreadyVoted) {
+    throw Error('User have no vote to added.');
+  }
+
+  const result = await RoadmapItemModel.findByIdAndUpdate(
+    id,
+    {
+      $inc: { upvotes: -1 },
+      $pull: { upvotesBy: payload?.email },
+    },
+    { new: true },
+  );
+
+  return result;
+};
+
 const addUpVoteInRoadmapItemDocumentInDB = async (
   id: string,
   payload: { userId: string; email: string },
 ) => {
-  const isUserAlreadyVoted = await RoadmapItemModel.find({
-    upvotesBy: { $in: payload?.email },
-  });
+  const idRoadmapItemExists = await RoadmapItemModel.findById(id);
 
-  if (isUserAlreadyVoted.length) {
+  if (!idRoadmapItemExists) {
+    throw new Error('Roadmap item not Exists.');
+  }
+  const alreadyVoted = idRoadmapItemExists?.upvotesBy.includes(payload.email);
+
+  if (alreadyVoted) {
     throw Error('Vote Already added.');
   }
 
@@ -45,4 +76,5 @@ export const RoadmapItemsServices = {
   getSingleRoadmapItemsFromDB,
   getAllRoadmapItemsFromDB,
   addUpVoteInRoadmapItemDocumentInDB,
+  removeUpVoteInRoadmapItemDocumentInDB,
 };

@@ -20,4 +20,9 @@ roadmapItemsRouter.post(
   RoadmapItemsControllers.addUpvoteInRoadmapItemDocument,
 );
 
+roadmapItemsRouter.delete(
+  '/upvote/:id',
+  RoadmapItemsControllers.removeUpvoteInRoadmapItemDocument,
+);
+
 export const roadmapItemsRoutes = roadmapItemsRouter;

@@ -1,3 +1,5 @@
+// import { Types } from 'mongoose';
+
 export type TRoadmapItems = {
   title: string;
   description: string;
@@ -5,4 +7,5 @@ export type TRoadmapItems = {
   category: string;
   upvotes: number;
   items: string[];
+  // comments: Types.ObjectId;
 };

@@ -13,7 +13,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Roadmap App server boosted on....🔥🔥🚀');
 });
 
-app.use('/api/v1', router);
+app.use('/api', router);
 
 //global error handler
 app.use(globalErrorHandler);

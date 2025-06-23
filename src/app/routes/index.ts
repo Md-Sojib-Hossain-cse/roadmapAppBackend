@@ -1,6 +1,7 @@
 import express from 'express';
 import { UserRoutes } from '../modules/users/users.routes';
 import { roadmapItemsRoutes } from '../modules/roadmapItems/roadmapItems.routes';
+import { commentsRoutes } from '../modules/comments/comments.routes';
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const moduleRoutes = [
   {
     path: '/roadmap',
     route: roadmapItemsRoutes,
+  },
+  {
+    path: '/comments',
+    route: commentsRoutes,
   },
 ];
 

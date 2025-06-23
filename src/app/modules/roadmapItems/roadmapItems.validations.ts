@@ -30,6 +30,7 @@ const roadmapItemValidationSchema = z.object({
   upvotes: z.number().int().nonnegative().default(0),
 
   items: z.array(z.string().trim().min(1, 'Item cannot be empty')).default([]),
+  // comments: z.array(commentsZodSchema).optional(),
 });
 
 export default roadmapItemValidationSchema;

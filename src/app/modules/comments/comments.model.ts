@@ -17,6 +17,7 @@ const commentsSchema = new Schema<TComments>(
       type: String,
       required: true,
       trim: true,
+      max: [300, "Comments Can't be more then 300 character long."],
     },
     // replies: {
     //   type: Schema.Types.ObjectId,

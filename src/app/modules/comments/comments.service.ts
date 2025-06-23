@@ -1,4 +1,4 @@
-import { TComments } from './comments.interface';
+import { TComments, TDeleteCommentPayload } from './comments.interface';
 import { CommentsModel } from './comments.model';
 
 const getAllCommentsFromDB = async () => {
@@ -11,7 +11,23 @@ const createCommentsOnDB = async (payload: TComments) => {
   return result;
 };
 
+const deleteCommentFromDB = async (
+  id: string,
+  payload: TDeleteCommentPayload,
+) => {
+  const res = await CommentsModel.findById(id);
+
+  if (!res?.userId.equals(payload?.userId)) {
+    throw new Error('This User has no access to delete this comment');
+  }
+
+  const result = await CommentsModel.findByIdAndDelete(id);
+
+  return result;
+};
+
 export const CommentsServices = {
   getAllCommentsFromDB,
   createCommentsOnDB,
+  deleteCommentFromDB,
 };

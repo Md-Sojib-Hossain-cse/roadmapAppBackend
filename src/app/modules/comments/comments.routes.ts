@@ -7,4 +7,6 @@ router.get('/', CommentsController.getAllComments);
 
 router.post('/create-comment', CommentsController.createComment);
 
+router.delete('/:id', CommentsController.deleteComment);
+
 export const commentsRoutes = router;

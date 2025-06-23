@@ -11,3 +11,8 @@ export type TReplies = {
   userId: Types.ObjectId;
   text: string;
 };
+
+export type TDeleteCommentPayload = {
+  userId: Types.ObjectId;
+  email: string;
+};

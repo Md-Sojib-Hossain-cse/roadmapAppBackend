@@ -14,6 +14,19 @@ const getAllComments = catchAsync(async (req, res) => {
   });
 });
 
+const createComment = catchAsync(async (req, res) => {
+  const commentData = req.body;
+  const result = await CommentsServices.createCommentsOnDB(commentData);
+
+  sendResponse(res, {
+    success: true,
+    message: 'Successfully Post a Comment.',
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+
 export const CommentsController = {
   getAllComments,
+  createComment,
 };

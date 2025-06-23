@@ -1,3 +1,4 @@
+import { TComments } from './comments.interface';
 import { CommentsModel } from './comments.model';
 
 const getAllCommentsFromDB = async () => {
@@ -5,6 +6,12 @@ const getAllCommentsFromDB = async () => {
   return result;
 };
 
+const createCommentsOnDB = async (payload: TComments) => {
+  const result = await CommentsModel.create(payload);
+  return result;
+};
+
 export const CommentsServices = {
   getAllCommentsFromDB,
+  createCommentsOnDB,
 };

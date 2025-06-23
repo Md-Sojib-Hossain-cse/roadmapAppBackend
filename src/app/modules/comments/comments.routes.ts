@@ -3,6 +3,8 @@ import { CommentsController } from './comments.controller';
 
 const router = express.Router();
 
-router.use('/', CommentsController.getAllComments);
+router.get('/', CommentsController.getAllComments);
+
+router.post('/create-comment', CommentsController.createComment);
 
 export const commentsRoutes = router;

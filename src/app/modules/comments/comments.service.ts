@@ -1,3 +1,5 @@
+import { RoadmapItemModel } from '../roadmapItems/roadmapItems.model';
+import { UserModel } from '../users/users.model';
 import {
   TComments,
   TDeleteCommentPayload,
@@ -12,6 +14,16 @@ const getAllCommentsFromDB = async () => {
 };
 
 const createCommentsOnDB = async (payload: TComments) => {
+  const isItemExists = await RoadmapItemModel.findById(payload?.itemId);
+
+  if (!isItemExists) {
+    throw Error('Roadmap item does not Exists to post a comment.');
+  }
+  const isUserExists = await UserModel.findById(payload?.userId);
+
+  if (!isUserExists) {
+    throw Error('User does not Exists to post a comment');
+  }
   const result = await CommentsModel.create(payload);
   return result;
 };
@@ -59,6 +71,12 @@ const createReplyOnDB = async (id: string, payload: TReplies) => {
     throw new Error(
       "Comment is not exist or maybe deleted . You can't reply at this moment.",
     );
+  }
+
+  const isUserExists = await UserModel.findById(payload?.userId);
+
+  if (!isUserExists) {
+    throw Error('User does not Exists to post a comment');
   }
 
   const result = await CommentsModel.findByIdAndUpdate(

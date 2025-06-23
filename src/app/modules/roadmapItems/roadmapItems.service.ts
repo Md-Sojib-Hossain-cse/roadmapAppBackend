@@ -1,3 +1,4 @@
+import { UserModel } from '../users/users.model';
 import { TRoadmapItems } from './roadmapItems.interface';
 import { RoadmapItemModel } from './roadmapItems.model';
 
@@ -8,6 +9,10 @@ const createRoadmapItemsIntoDB = async (payload: TRoadmapItems) => {
 
 const getSingleRoadmapItemsFromDB = async (id: string) => {
   const result = await RoadmapItemModel.findById(id);
+
+  if (!result) {
+    throw new Error("This roadmap doesn't Exist.");
+  }
   return result;
 };
 
@@ -24,6 +29,12 @@ const removeUpVoteInRoadmapItemDocumentInDB = async (
 
   if (!idRoadmapItemExists) {
     throw new Error('Roadmap item not Exists.');
+  }
+
+  const isUserExists = await UserModel.findById(payload?.userId);
+
+  if (!isUserExists) {
+    throw Error('User does not Exists to vote.');
   }
 
   const alreadyVoted = idRoadmapItemExists?.upvotesBy.includes(payload?.email);
@@ -52,6 +63,11 @@ const addUpVoteInRoadmapItemDocumentInDB = async (
 
   if (!idRoadmapItemExists) {
     throw new Error('Roadmap item not Exists.');
+  }
+  const isUserExists = await UserModel.findById(payload?.userId);
+
+  if (!isUserExists) {
+    throw Error('User does not Exists to vote.');
   }
   const alreadyVoted = idRoadmapItemExists?.upvotesBy.includes(payload.email);
 

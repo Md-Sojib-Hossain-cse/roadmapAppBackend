@@ -28,6 +28,10 @@ const roadmapItemsSchema = new Schema<TRoadmapItems>(
       type: Number,
       default: 0,
     },
+    upvotesBy: {
+      type: [String],
+      default: [],
+    },
     items: {
       type: [String],
       default: [],

@@ -41,8 +41,25 @@ const getAllSingleRoadmapItem = catchAsync(async (req, res) => {
   });
 });
 
+const addUpvoteInRoadmapItemDocument = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const userInfo = req.body;
+  const result = await RoadmapItemsServices.addUpVoteInRoadmapItemDocumentInDB(
+    id,
+    userInfo,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Upvote added Successfully',
+    data: result,
+  });
+});
+
 export const RoadmapItemsControllers = {
   createRoadmapItems,
   getSingleRoadmapItem,
   getAllSingleRoadmapItem,
+  addUpvoteInRoadmapItemDocument,
 };

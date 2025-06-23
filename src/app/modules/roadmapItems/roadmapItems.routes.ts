@@ -15,4 +15,9 @@ roadmapItemsRouter.get('/:id', RoadmapItemsControllers.getSingleRoadmapItem);
 
 roadmapItemsRouter.get('/', RoadmapItemsControllers.getAllSingleRoadmapItem);
 
+roadmapItemsRouter.post(
+  '/upvote/:id',
+  RoadmapItemsControllers.addUpvoteInRoadmapItemDocument,
+);
+
 export const roadmapItemsRoutes = roadmapItemsRouter;

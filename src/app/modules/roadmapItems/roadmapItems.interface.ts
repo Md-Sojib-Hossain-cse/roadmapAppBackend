@@ -6,6 +6,7 @@ export type TRoadmapItems = {
   status: 'Planned' | 'In-progress' | 'Completed';
   category: string;
   upvotes: number;
+  upvotesBy: string[];
   items: string[];
   // comments: Types.ObjectId;
 };

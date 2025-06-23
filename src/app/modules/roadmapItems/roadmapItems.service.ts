@@ -16,8 +16,33 @@ const getAllRoadmapItemsFromDB = async () => {
   return result;
 };
 
+const addUpVoteInRoadmapItemDocumentInDB = async (
+  id: string,
+  payload: { userId: string; email: string },
+) => {
+  const isUserAlreadyVoted = await RoadmapItemModel.find({
+    upvotesBy: { $in: payload?.email },
+  });
+
+  if (isUserAlreadyVoted.length) {
+    throw Error('Vote Already added.');
+  }
+
+  const result = await RoadmapItemModel.findByIdAndUpdate(
+    id,
+    {
+      $inc: { upvotes: 1 },
+      $push: { upvotesBy: payload?.email },
+    },
+    { new: true },
+  );
+
+  return result;
+};
+
 export const RoadmapItemsServices = {
   createRoadmapItemsIntoDB,
   getSingleRoadmapItemsFromDB,
   getAllRoadmapItemsFromDB,
+  addUpVoteInRoadmapItemDocumentInDB,
 };

@@ -36,11 +36,6 @@ const roadmapItemsSchema = new Schema<TRoadmapItems>(
       type: [String],
       default: [],
     },
-    // comments: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Comment',
-    //   default: [],
-    // },
   },
   {
     timestamps: true,

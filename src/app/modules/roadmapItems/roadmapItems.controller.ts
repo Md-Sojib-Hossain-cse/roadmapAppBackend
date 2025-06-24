@@ -32,6 +32,7 @@ const getSingleRoadmapItem = catchAsync(async (req, res) => {
 
 const getAllSingleRoadmapItem = catchAsync(async (req, res) => {
   const result = await RoadmapItemsServices.getAllRoadmapItemsFromDB();
+  console.log(req.user);
 
   sendResponse(res, {
     success: true,

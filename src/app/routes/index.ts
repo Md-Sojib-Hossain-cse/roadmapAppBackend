@@ -2,6 +2,7 @@ import express from 'express';
 import { UserRoutes } from '../modules/users/users.routes';
 import { roadmapItemsRoutes } from '../modules/roadmapItems/roadmapItems.routes';
 import { commentsRoutes } from '../modules/comments/comments.routes';
+import { AuthRoutes } from '../modules/auth/auth.routes';
 
 const router = express.Router();
 
@@ -17,6 +18,10 @@ const moduleRoutes = [
   {
     path: '/comments',
     route: commentsRoutes,
+  },
+  {
+    path: '/auth',
+    route: AuthRoutes,
   },
 ];
 

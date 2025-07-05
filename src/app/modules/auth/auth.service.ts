@@ -34,7 +34,11 @@ const loginUserOnDB = async (payload: TLoginUser) => {
     expiresIn: '24h',
   });
 
-  return { accessToken };
+  if (isPasswordMatched) {
+    return { accessToken };
+  } else {
+    throw new AppError(httpStatus.FORBIDDEN, 'User Credentials invalid');
+  }
 };
 
 export const AuthServices = {

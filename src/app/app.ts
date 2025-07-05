@@ -14,13 +14,14 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
-      'https://roadmap-app-backend.vercel.app/',
-      'https://roadmap-app-backend-axkbwesj4-md-sojib-hossain-cses-projects.vercel.app/',
+      'https://roadmap-app-frontend007.vercel.app/',
+      'https://roadmap-6lz5229iq-md-sojib-hossain-cses-projects.vercel.app/',
     ],
     credentials: true,
   }),
 );
 
+//root route
 app.get('/', (req: Request, res: Response) => {
   res.send('Roadmap App server boosted on....🔥🔥🚀');
 });

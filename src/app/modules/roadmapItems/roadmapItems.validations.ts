@@ -15,6 +15,8 @@ const roadmapItemValidationSchema = z.object({
     .trim()
     .min(1, 'Description cannot be empty.'),
 
+  image: z.string().optional(),
+
   status: z.enum(['Planned', 'In-progress', 'Completed'], {
     required_error: 'Status is required!',
     invalid_type_error: 'Status must be Planned, In-progress, or Completed.',

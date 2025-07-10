@@ -3,6 +3,7 @@
 export type TRoadmapItems = {
   title: string;
   description: string;
+  image?: string;
   status: 'Planned' | 'In-progress' | 'Completed';
   category: string;
   upvotes: number;

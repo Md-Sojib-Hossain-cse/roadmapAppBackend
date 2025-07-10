@@ -7,7 +7,7 @@ import config from '../config';
 const auth = () => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const token = req.headers.authorization;
+      const token = req.headers.cookie?.split('=')[1];
       if (!token) {
         throw new AppError(
           httpStatus.UNAUTHORIZED,

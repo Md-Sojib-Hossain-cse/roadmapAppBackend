@@ -14,6 +14,9 @@ const roadmapItemsSchema = new Schema<TRoadmapItems>(
       required: [true, 'Description is required!'],
       trim: true,
     },
+    image: {
+      type: String,
+    },
     status: {
       type: String,
       enum: ['Planned', 'In-progress', 'Completed'],

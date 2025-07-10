@@ -35,7 +35,14 @@ const loginUserOnDB = async (payload: TLoginUser) => {
   });
 
   if (isPasswordMatched) {
-    return { accessToken };
+    const userObj = {
+      name: isUserExists?.name,
+      email: isUserExists?.email,
+      image: isUserExists?.image,
+      gender: isUserExists?.gender,
+      accessToken,
+    };
+    return userObj;
   } else {
     throw new AppError(httpStatus.FORBIDDEN, 'User Credentials invalid');
   }

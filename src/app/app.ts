@@ -14,8 +14,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
-      'https://roadmap-app-frontend007.vercel.app/',
-      'https://roadmap-6lz5229iq-md-sojib-hossain-cses-projects.vercel.app/',
+      'https://roadmap-app-frontend007.vercel.app',
+      'https://roadmap-6lz5229iq-md-sojib-hossain-cses-projects.vercel.app',
     ],
     credentials: true,
   }),

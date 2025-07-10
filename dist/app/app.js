@@ -16,8 +16,8 @@ app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
     origin: [
         'http://localhost:5173',
-        'https://roadmap-app-frontend007.vercel.app/',
-        'https://roadmap-6lz5229iq-md-sojib-hossain-cses-projects.vercel.app/',
+        'https://roadmap-app-frontend007.vercel.app',
+        'https://roadmap-6lz5229iq-md-sojib-hossain-cses-projects.vercel.app',
     ],
     credentials: true,
 }));

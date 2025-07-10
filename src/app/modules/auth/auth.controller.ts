@@ -15,7 +15,7 @@ const loginUser = catchAsync(
       res.cookie('accessToken', result.accessToken, {
         httpOnly: true,
         secure: config.node_env === 'production',
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000,
       }),
       {

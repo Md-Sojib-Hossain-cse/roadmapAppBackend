@@ -90,27 +90,23 @@ src/
 
 ### 🛡 Middleware & Configuration
 
-## Request Validation
-
-Custom validateRequest middleware uses Zod to validate request bodies and ensure data integrity.
-
-## Auth Middleware
+### Auth Middleware
 
 Verifies JWT tokens in the Authorization header and attaches decoded user to req.user.
 
-# Global Error Handler
+- Global Error Handler
 
 Gracefully handles:
 
-# Zod validation errors
+- Zod validation errors
 
-# Mongoose Validation, Cast, and Duplicate Key errors
+- Mongoose Validation, Cast, and Duplicate Key errors
 
-# Custom AppError instances
+- Custom AppError instances
 
-# Generic errors
+- Generic errors
 
-# 404 Middleware
+- 404 Middleware
 
 Unmatched routes return:
 
@@ -154,11 +150,11 @@ Base path: https://roadmap-app-backend.vercel.app/api/users
 
 Method Endpoint Description Auth Required
 
-# POST /create-user Create a new user ❌
+- POST /create-user Create a new user ❌
 
-# GET /:id Get user by ID ❌
+- GET /:id Get user by ID ❌
 
-# GET / Get all users ❌
+- GET / Get all users ❌
 
 📥 Example Payload
 
@@ -196,15 +192,15 @@ Base path: /api/roadmap
 
 Method Endpoint Description Auth Required
 
-# POST /create-roadmap Create a roadmap item ✅
+- POST /create-roadmap Create a roadmap item ✅
 
-# GET /:id Get roadmap item by ID ✅
+- GET /:id Get roadmap item by ID ✅
 
-# GET / Get all roadmap items ✅
+- GET / Get all roadmap items ✅
 
-# POST /upvote/:id Add upvote to roadmap item ✅
+- POST /upvote/:id Add upvote to roadmap item ✅
 
-# DELETE /upvote/:id Remove upvote from roadmap item ✅
+- DELETE /upvote/:id Remove upvote from roadmap item ✅
 
 📥 Example Payload (Create)
 
@@ -247,15 +243,15 @@ Base path: /api/comments
 
 Method Endpoint Description Auth Required
 
-# GET / Get all comments ❌
+- GET / Get all comments ❌
 
-# POST /create-comment Create a comment ❌
+- POST /create-comment Create a comment ❌
 
-# PATCH /:id Update a comment by ID ✅
+- PATCH /:id Update a comment by ID ✅
 
-# DELETE /:id Delete a comment by ID ✅
+- DELETE /:id Delete a comment by ID ✅
 
-# POST /:commentId/create-reply Create a reply to a comment ✅
+- POST /:commentId/create-reply Create a reply to a comment ✅
 
 📥 Example Payload (Create Comment)
 
